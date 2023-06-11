@@ -1,15 +1,15 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from "react";
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
 import api from '../services/api';
 
 
-const Register = () => {
+const CreatePet = () => {
     const [name, setName] = useState('');
-    const [cpf, setCPF] = useState('');
-    const [password, setPassword] = useState('');
-    const [tel, setTel] = useState('');
-    const [email, setEmail] = useState('');
+    const [breed, setBreed] = useState('');
+    const [type, setType] = useState('');
+    const [gender, setGender] = useState('');
+    const [birthdate, setBirthdate] = useState('');
 
     const navi = useNavigation();
 
@@ -30,6 +30,8 @@ const Register = () => {
 
     return (
         <View style={styles.container}>
+            <Image style={styles.image} source={require('../img/logo_pet.png')}/>
+
             <TextInput
                 style={styles.input}
                 placeholder="Nome"
@@ -38,33 +40,34 @@ const Register = () => {
             />
             <TextInput
                 style={styles.input}
-                placeholder="Telefone"
-                value={tel}
-                onChangeText={setTel}
+                placeholder="Raça"
+                value={breed}
+                onChangeText={setBreed}
             />
             <TextInput
                 style={styles.input}
-                placeholder="CPF"
-                value={cpf}
-                onChangeText={setCPF}
+                placeholder="Data de Nascimento"
+                value={birthdate}
+                onChangeText={setBirthdate}
             />
             <TextInput
                 style={styles.input}
-                placeholder="E-Mail"
-                value={email}
-                onChangeText={setEmail}
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="Senha"
+                placeholder="Tipo"
                 secureTextEntry={true}
-                value={password}
-                onChangeText={setPassword}
+                value={type}
+                onChangeText={setType}
+            />
+            <TextInput
+                style={styles.input}
+                placeholder="Sexo"
+                secureTextEntry={true}
+                value={gender}
+                onChangeText={setGender}
             />
             <TouchableOpacity style={styles.button} onPress={handleLogin}>
-                <Text style={styles.buttonText}>Entrar</Text>
+                <Text style={styles.buttonText}>Cadastrar</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.buttonCancel} onPress={() => navi.navigate('login')}>
+            <TouchableOpacity style={styles.buttonCancel} onPress={() => navi.navigate('main')}>
                 <Text style={styles.buttonText}>Cancelar</Text>
             </TouchableOpacity>
         </View>
@@ -77,6 +80,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#fff',
+    },
+    image: {
+        width: 280,
+        height: 150,
+        marginBottom: 50,
     },
     input: {
         borderWidth: 1,
@@ -92,7 +100,6 @@ const styles = StyleSheet.create({
         padding: 10,
         width: '80%',
         alignItems: 'center',
-        marginTop: 10,
     },
     buttonCancel:{
         backgroundColor: '#D33B28FF',
@@ -100,7 +107,7 @@ const styles = StyleSheet.create({
         padding: 10,
         width: '80%',
         alignItems: 'center',
-        marginTop: 20,
+        marginTop: 10,
     },
     buttonText: {
         color: '#fff',
@@ -108,4 +115,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default Register;
+export default CreatePet;

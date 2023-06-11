@@ -6,11 +6,15 @@ export const Container = styled.View`
     padding: 30px;
 `;
 
-export const Form = styled.View`
-    flex-direction: row;
-    padding-bottom: 20px;
-    border-bottom-width: 1px;
-    border-color: #eee;
+export const ContainerGrafic = styled.View`
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* background: #eee; */
+    border-radius: 14px;
+    margin: 0 20px 30px;
+    padding: 5px;
+    border: 1px solid #FF8C00;
 `;
 export const Input = styled.TextInput`
     flex: 1;
@@ -23,7 +27,7 @@ export const Input = styled.TextInput`
 export const SubmitButton = styled(RectButton)`
     justify-content: center;
     align-items: center;
-    background: #3498db;
+    background: #FF8C00;
     border-radius: 4px;
     margin-left: 10px;
     padding: 0 12px;
@@ -59,13 +63,13 @@ export const Name = styled.Text`
 `;
 export const NameDetal = styled.Text`
     font-size: 25px;
-    color: #3498db;
+    color: #FF8C00;
     font-weight: bold;
     margin: 4px;
 `;
 export const Curiosity = styled.Text`
     font-size: 30px;
-    color: #013d55;
+    color: #FF8C00;
     font-weight: bold;
     margin: 4px;
 `;
@@ -86,7 +90,7 @@ export const ProfileButton = styled(RectButton)`
     padding: 10px;
     align-self: stretch;
     border-radius: 4px;
-    background: #3498db;
+    background: #FF8C00;
     justify-content: center;
     align-items: center;
     height: 35px;
@@ -107,7 +111,7 @@ export const Header = styled.View`
 export const ContainerDetal = styled.View`
 display: flex;
 flex-direction: column;
-border: 1px solid #3498db;
+border: 1px solid #FF8C00;
 border-radius: 10px;
 padding: 15px;
 margin: 10px;
@@ -116,7 +120,7 @@ margin: 10px;
 export const Avatarperfil = styled.Image`
   width: 130px;
   height: 130px;
-  /* border-radius: 20px; */
+  border-radius: 80;
   background: #eee;
 `;
 
