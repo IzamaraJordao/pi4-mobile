@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     input: {
         borderWidth: 1,
         borderColor: '#ccc',
-        borderRadius: 40,
+        borderRadius: 10,
         padding: 10,
         marginVertical: 10,
         width: '81%',
@@ -62,11 +62,11 @@ const styles = StyleSheet.create({
     image: {
         width: 280,
         height: 150,
-        marginBottom: 50,
+        marginBottom: 10,
     },
     button:{
         backgroundColor: '#FF8C00',
-        borderRadius: 40,
+        borderRadius: 10,
         padding: 10,
         width: '80%',
         alignItems: 'center',

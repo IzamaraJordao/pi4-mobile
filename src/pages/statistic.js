@@ -88,10 +88,11 @@ const Statistic = () => {
         <Container>
             <Header>
                 <Image style={styles.image} source={require('../img/logo_pet.png')} />
-                <Curiosity>Estatistica</Curiosity>
             </Header>
+            <Curiosity>Dados Gerais</Curiosity>
+
             <ContainerDetal>
-                <Curiosity>Consumo de Ração</Curiosity>
+                <TitleStatstic>Consumo de Ração</TitleStatstic>
 
                 <Bio>Média:<Name>{media}</Name></Bio>
                 <Bio>Moda:  <Name>{moda}</Name></Bio>
@@ -116,8 +117,8 @@ const Statistic = () => {
 const styles = StyleSheet.create({
     image: {
         marginLeft: 20,
-        width: 300,
-        height: 150,
+        width: 180,
+        height: 100,
         marginBottom: 20,
     },
 });

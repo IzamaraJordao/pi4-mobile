@@ -83,7 +83,7 @@ export const Curiosity = styled.Text`
 `;
 export const TitleStatstic = styled.Text`
     font-size: 20px;
-    color: #FF8C00;
+    color: #822710FF;
     font-weight: bold;
     margin: 4px;
 `;
@@ -134,7 +134,7 @@ margin: 10px;
 export const Avatarperfil = styled.Image`
   width: 110px;
   height: 110px;
-  border-radius: 80;
+  border-radius: 50px;
   background: #eee;
 `;
 

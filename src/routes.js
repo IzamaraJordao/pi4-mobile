@@ -7,6 +7,7 @@ import Login from './pages/login'
 import Statistic from './pages/statistic'
 import Details from './pages/detals'
 import CreatePet from './pages/create-pet'
+import { Image } from "react-native-svg";
 
 
 const Stack = createStackNavigator()
@@ -28,7 +29,7 @@ export default function Routes() {
                 }} />
 
                 <Stack.Screen name="statistic" component={Statistic} options={{
-                    title: 'Parte Estatistica',
+                    title: 'Estatistica',
                     headerTitleAlign: 'center',
                     headerLeft: null,
                     headerStyle: {
