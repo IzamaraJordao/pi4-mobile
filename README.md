@@ -1,11 +1,12 @@
+![Imagem do PetComilao](./src/img/logo_pet.png)
 -Nome do Projeto:
     "PetComilão"
 
 
 -Integrantes do grupo:
-    Fernanda Baiano
-    Izamara Jordão
-    Matheus Barbosa Ferreira
+    -Fernanda Baiano, 
+    -Izamara Jordão, 
+    -Matheus Barbosa Ferreira
 
 
 -Para instalar o projeto:
