@@ -1,47 +1,62 @@
-import { useNavigation } from '@react-navigation/native';
-import React, { useState } from "react";
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
-import { Container, Header, Avatarperfil, Nameperfil, Bioperfil, Stars, Starred, OwnerAvatar, Info, Title, Author, Bio, Name, List, NameDetal, ContainerDetal, Curiosity } from './styles';
+import {useNavigation} from '@react-navigation/native';
+import React, { useState, Component} from 'react';
+import {
+  StyleSheet,
+  Image,
+} from 'react-native';
+import {
+  Container,
+  Header,
+  Avatarperfil,
+  Bio,
+  Name,
+  NameDetal,
+  ContainerDetal,
+  Curiosity,
+} from './styles';
 
-const Details = () => {
-    const [name, setName] = useState('');
-    const [breed, setBreed] = useState('');
-    const [type, setType] = useState('dog');
-    const [gender, setGender] = useState('');
-    const [birthdate, setBirthdate] = useState('');
+export default class Details extends Component {
 
-    const navi = useNavigation();
 
-    const handleLogin = () => {
-        if (email === '' && password === '') {
-            navi.navigate('login')
-        } else {
-            alert('E-mail ou senha inválidos!')
-        }
-    };
-    
+  render() {
+    const { route } = this.props;
+    const { user } = route.params;
+
     return (
-        <Container>
-            <Header>
-                {type === 'dog' ? <Avatarperfil source={require('../img/cachorro.png')} /> : <Avatarperfil source={require('../img/gato.jpg')} />}
-                <Avatarperfil source={require('../img/gato.jpg')} />
-                <Curiosity>Detalhes</Curiosity>
-            </Header>
-            <ContainerDetal>
-                <NameDetal>Dados PET</NameDetal>
-                <Bio>Nome:<Name>Teste</Name></Bio>
-                <Bio>Espécie:  <Name>Teste</Name></Bio>
-                <Bio>Raça:  <Name>Teste</Name></Bio>
-                <Bio>Sexo:  <Name>Teste</Name></Bio>
-                <Bio>Data de Nascimento:  <Name>Teste</Name></Bio>
-            </ContainerDetal>
-            <ContainerDetal>
-                <NameDetal>Dados do Dono</NameDetal>
-                <Bio>Nome:<Name>Teste</Name></Bio>
-                <Bio>Email:  <Name>matheusbf.mf@gmail.com</Name></Bio>
-                <Bio>Telefone:  <Name>123456789</Name></Bio>
-            </ContainerDetal>
-        </Container>
-    )
+      <Container>
+        <Header>
+          {user.type === 'cachorro' ? (
+            <Avatarperfil source={require('../img/cachorro.png')} />
+          ) : (
+            <Avatarperfil source={require('../img/gato.jpg')} />
+          )}
+          <Curiosity>Detalhes</Curiosity>
+        </Header>
+        <ContainerDetal>
+          <NameDetal>Dados PET</NameDetal>
+          <Bio>
+            Nome:<Name>{user.name}</Name>
+          </Bio>
+          <Bio>
+            Espécie: <Name>{user.type}</Name>
+          </Bio>
+          <Bio>
+            Raça: <Name>{user.breed}</Name>
+          </Bio>
+          <Bio>
+            Sexo: <Name>{user.gender}</Name>
+          </Bio>
+          <Bio>
+            Data de Nascimento: <Name>{user.birthDate}</Name>
+          </Bio>
+          <Bio>
+            Peso: <Name>{user.weigth}</Name>
+          </Bio>
+        </ContainerDetal>
+
+      </Container>
+    );
+  }
 }
-export default Details;
+
+

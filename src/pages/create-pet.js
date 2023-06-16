@@ -1,28 +1,34 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from "react";
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, DatePicker } from 'react-native';
 import api from '../services/api';
 
 
 const CreatePet = () => {
     const [name, setName] = useState('');
-    const [breed, setBreed] = useState('');
     const [type, setType] = useState('');
+    const [breed, setBreed] = useState('');
     const [gender, setGender] = useState('');
     const [birthdate, setBirthdate] = useState('');
+    const [weigth, setWeigth] = useState('');
 
     const navi = useNavigation();
 
-    const handleLogin = () => {
+    const handleLogin = async () => {
+       console.log(name,type, breed, gender, birthdate, weigth )     
+    //    const res = await api.get('/pets/1')
+    //    console.log(res.data)
         if(name && breed && type && gender && birthdate){
-            api.post('/pets', {
-                setName,
-                setBreed,
-                setType,
-                setGender,
-                setBirthdate
+            const date = new Date(birthdate)
+            const response = await api.post('/pets', {
+                name: name,
+                type: type,
+                breed: breed,
+                gender: gender,
+                birthdate: date,
+                weigth: weigth
             })
-            navi.navigate('login')
+            navi.navigate('register', {id: response.data.id})
         }else{
             alert('Todos os campos são obrigatórios!')
         }
@@ -64,8 +70,16 @@ const CreatePet = () => {
                 value={gender}
                 onChangeText={setGender}
             />
+            <TextInput
+                style={styles.input}
+                placeholder="Peso"
+                type="number"
+                secureTextEntry={true}
+                value={weigth}
+                onChangeText={setWeigth}
+            />
             <TouchableOpacity style={styles.button} onPress={handleLogin}>
-                <Text style={styles.buttonText}>Cadastrar</Text>
+                <Text style={styles.buttonText}>Continuar Cadastro</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.buttonCancel} onPress={() => navi.navigate('main')}>
                 <Text style={styles.buttonText}>Cancelar</Text>

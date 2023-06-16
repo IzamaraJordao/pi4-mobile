@@ -14,13 +14,16 @@ const Register = () => {
     const navi = useNavigation();
 
     const handleLogin = () => {
+        const { route } = this.props;
+        const { id } = route.params;
         if(name && breed && type && gender && birthdate){
-            api.post('/pets', {
+            api.post('/user', {
                 setName,
                 setBreed,
                 setType,
                 setGender,
-                setBirthdate
+                setBirthdate,
+                id
             })
             navi.navigate('login')
         }else{

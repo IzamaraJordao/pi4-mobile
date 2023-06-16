@@ -16,7 +16,7 @@ const Login = () => {
         }
     };
     const handleRegister = () => {
-        navigation.navigate('register')
+        navigation.navigate('create-pet')
     };
 
     return (
@@ -39,9 +39,7 @@ const Login = () => {
                 <Text style={styles.buttonText}>Entrar</Text>
             </TouchableOpacity>
 
-            {/* <TouchableOpacity style={styles.button}  > */}
                 <Text style={styles.buttonTextRegister} onPress={handleRegister}>Cadastre-se</Text>
-            {/* </TouchableOpacity> */}
         </View>
     )
 }

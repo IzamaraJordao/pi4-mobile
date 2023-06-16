@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import {
   Keyboard,
   ActivityIndicator,
@@ -8,13 +8,17 @@ import {
   StyleSheet,
   TouchableOpacity,
   Text,
+  ScrollView,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {
   Container,
+  Form, Input, SubmitButton, List, User, Avatar, Name, Bio, ProfileButton, ProfileButtonText,DivContainer, Avatarperfil
 } from './styles';
 import api from '../services/api';
+import axios from 'axios';
+import Details from './detals';
 
 
 
@@ -25,16 +29,18 @@ export default class Main extends Component {
     loading: false,
   };
 
-  async componentDidMount() {
+
+
+  async componentDidMount() { //carrega os dados do storage
     //busca os dados do storage
     const users = await AsyncStorage.getItem('users');
-
+    
     if (users) {
       this.setState({ users: JSON.parse(users) });
     }
   }
 
-  async componentDidUpdate(_, prevState) {
+  async componentDidUpdate(_, prevState) {  
     //salva os dados no storage
     const { users } = this.state;
 
@@ -43,10 +49,6 @@ export default class Main extends Component {
     }
   }
 
-  getChart = async () => {
-  }
-
-
   handleAddUser = async () => {
     try {
       const { name, users, loading } = this.state;
@@ -54,29 +56,8 @@ export default class Main extends Component {
       this.setState({ loading: true });
       this.setState({ loading: true });
 
-      const respLine = await api.get(`/RegulationAliment`);
-      const data = respLine.data;
-      console.log(respLine.data);
-
-      //   const response = await api.get(`/character/?name=${name}`);
-      //   const episodeId = await response.data.results[0].episode[0]
-      //     .split('/')
-      //     .pop();
-      //   const locationId = await response.data.results[0].location.url
-      //     .split('/')
-      //     .pop();
-      //   const responseEpisode = await api.get(`/episode/${episodeId}`);
-
-      //   const data = {
-      //     image: response.data.results[0].image,
-      //     name: response.data.results[0].name,
-      //     status: response.data.results[0].status,
-      //     locationName: response.data.results[0].location.name,
-      //     locationUrl: locationId,
-      //     species: response.data.results[0].species,
-      //     episode: responseEpisode.data.episode,
-      //     episodeQtd: response.data.results[0].episode.length,
-      //   };
+      const res = await api.get("/pets/1");
+      const data = res.data;
 
       this.setState({
         users: [data, ...users],
@@ -84,10 +65,6 @@ export default class Main extends Component {
         loading: false,
       });
 
-      console.log(
-        '🚀 ~ file: main.js:51 ~ Main ~ handleAddUser= ~ data:',
-        data,
-      );
       Keyboard.dismiss();
     } catch (error) {
       alert('Usuário não encontrado');
@@ -95,12 +72,11 @@ export default class Main extends Component {
     }
   };
 
-
   render() {
-    ///////////Linha
-    const fill = '#FF8C00';
-
-
+ 
+    
+    const { name, users, loading } = this.state;
+    console.log("🚀 ~ file: main.js:81 ~ Main ~ render ~ users:", users)
 
     return (
       <Container>
@@ -110,19 +86,62 @@ export default class Main extends Component {
             this.props.navigation.navigate('create-pet');
           }}>
             <Text style={styles.buttonText}>Cadastrar PET</Text>
-            {/* <Icon name='add' size={20} color='#fff' /> */}
           </TouchableOpacity>
+
           <TouchableOpacity style={styles.button} onPress={() => {
-            this.props.navigation.navigate('detail');
-          }} >
-            <Text style={styles.buttonText}>Detalhes do pet</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={() => {
-            this.props.navigation.navigate('statistic');
+            this.props.navigation.navigate('statistic'); 
           }} >
             <Text style={styles.buttonText}>Estatísticas</Text>
           </TouchableOpacity>
 
+          <TouchableOpacity style={styles.button} onPress={() => {
+            this.handleAddUser();
+          }} >
+            <Text style={styles.buttonText}>Teste</Text>
+          </TouchableOpacity>
+        
+        <ScrollView>
+          <List
+                    showVerticalScrollIndicator={false}
+                    data={users}
+                    keyExtractor={user => user.id}
+                    renderItem={({ item }) => (
+                        <Form>
+                            <DivContainer>
+                            {item.type === 'cachorro' ?
+                             <Avatarperfil onPress={() => {
+                              this.props.navigation.navigate('detail');
+                            }} source={require('../img/cachorro.png')}
+                             /> : <Avatarperfil source={require('../img/gato.jpg')} />}
+                            </DivContainer>
+
+                            <DivContainer>
+                                <Name>{item.name}</Name>
+                                <Bio>Raça: <Name>{item.breed}</Name></Bio>                            
+                                <Bio>Sexo <Name>{item.gender}</Name></Bio>
+                                
+                                <Form>
+
+                                <ProfileButton onPress={() => {
+                                    // this.props.navigation.navigate('detail');
+                                    this.props.navigation.navigate('detail', { user: item });
+                                }}>
+                                    <ProfileButtonText>Detalhes</ProfileButtonText>
+                                </ProfileButton>
+
+                                <ProfileButton onPress={() => {
+                                    this.setState({ users: users.filter(user => user.login !== item.login) })
+                                }}
+                                    style={{ backgroundColor: '#ffc0cb' }
+                                    }>
+                                    <ProfileButtonText>Excluir</ProfileButtonText>
+                                </ProfileButton>
+                                </Form>
+                            </DivContainer>
+                        </Form>
+                    )}
+                />
+</ScrollView>
       </Container>
     );
   }
@@ -131,9 +150,9 @@ export default class Main extends Component {
 const styles = StyleSheet.create({
   image: {
     marginLeft: 20,
-    width: 300,
-    height: 150,
-    marginBottom: 50,
+    width: 200,
+    height: 100,
+    marginBottom: 10,
   },
   button: {
     flexDirection: 'column',
@@ -142,14 +161,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#FF8C00',
     borderRadius: 40,
     padding: 10,
-    width: '100%',
-    height: 80,
+    width: '80%',
+    height: 40,
     alignItems: 'center',
     marginTop: 20,
   },
   buttonText: {
     color: '#fff',
-    fontSize: 20,
+    fontSize: 14,
     fontWeight: 'bold',
   },
 });
