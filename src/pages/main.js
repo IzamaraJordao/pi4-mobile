@@ -83,7 +83,7 @@ export default class Main extends Component {
 
         <Curiosity>Lista de PETS</Curiosity>
 
-        {loading ? <ActivityIndicator color="#fff" /> : null}
+        {loading ? <ActivityIndicator color="#822710FF" /> : null}
         <ScrollView>
           {users.map((item, index) => (
             <Form key={index}>
