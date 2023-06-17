@@ -23,9 +23,9 @@ const Register = () => {
   const navi = useNavigation();
 
   const handleLogin = () => {
-    const {route} = this.props;
-    const {id} = route.params;
-    if (name && breed && type && gender && birthdate) {
+    // const {route} = this.props;
+    // const {id} = route.params;
+    if (name && cpf && password && tel && email) {
       navi.navigate('login');
     } else {
       alert('Todos os campos são obrigatórios!');
